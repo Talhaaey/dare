@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const api= require('../middleware/http.js');
+const api= require('../middleware/apis.js');
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
@@ -12,7 +12,7 @@ router.get('/', async function(req, res, next) {
         'authorization': req.headers.authorization
       };
       const url = `https://dare-nodejs-assessment.herokuapp.com/api/clients`;
-      const response = await api.get(url, {}, headers);
+      const response = await api.getClients(url, {}, headers);
         // console.log(response.statusCode);
       // console.log(limit);
       let clients = [];
@@ -52,7 +52,7 @@ router.get('/:id', async function(req, res, next) {
         'authorization': req.headers.authorization
       };
       const clientUrl = `https://dare-nodejs-assessment.herokuapp.com/api/clients`;
-      const clients = await api.get(clientUrl, {}, headers);
+      const clients = await api.getClients(clientUrl, {}, headers);
       let response = [];
       for(let client of clients){
         if(client.id == id){
@@ -93,9 +93,9 @@ router.get('/:id/policies', async function(req, res, next) {
       };
       let role = "user";
       const clientUrl = `https://dare-nodejs-assessment.herokuapp.com/api/clients`;
-      const clients = await api.get(clientUrl, {}, headers);
+      const clients = await api.getClients(clientUrl, {}, headers);
       const policyUrl = `https://dare-nodejs-assessment.herokuapp.com/api/policies`;
-      const policies = await api.get(policyUrl, {}, headers);
+      const policies = await api.getPolicies(policyUrl, {}, headers);
       for(let client of clients){
         if(client.id == id){
           role = client.role;

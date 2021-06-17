@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const api= require('../middleware/http.js');
+const http= require('../middleware/http.js');
 /* GET home page. */
 router.post('/', async function(req, res, next) {
   try{
@@ -11,7 +11,7 @@ router.post('/', async function(req, res, next) {
         'Content-Type': 'application/json',
       };
       const url = `https://dare-nodejs-assessment.herokuapp.com/api/login`;
-      let response = await api.post(url, {
+      let response = await http.post(url, {
         client_id: client_id,
         client_secret: client_secret,
       }, headers);

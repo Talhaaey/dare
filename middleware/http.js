@@ -16,9 +16,9 @@ const axios = require('axios');
           return response.data;
         } catch (error) {
           if (error.response) {
-            throw error.response.data;
+            return error.response.data;
           }
-          throw error.message;
+          return error.message;
         }
       },
       get: async function(url, params, headers) {
@@ -32,12 +32,13 @@ const axios = require('axios');
         };
         try {
           const response = await axios.get(url, config);
-          return response.data;
+            console.log(response);
+          return response;
         } catch (error) {
           if (error.response){
-            throw error.response.data;
+            return error.response.data;
           }
-          throw error;
+          return error;
         }
       },
       delete: async function(url, params, headers) {
@@ -54,9 +55,9 @@ const axios = require('axios');
             return response.data;
           } catch (error) {
             if (error.response){
-              throw error.response.data;
+              return error.response.data;
             }
-            throw error;
+            return error;
           }
         },
   };
